@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { ItemController } = require("./controllers");
+const { ItemController, DataController } = require("./controllers");
 
 const router = express.Router();
 
@@ -10,4 +10,6 @@ router.put("/items/:id", ItemController.edit);
 router.post("/items", ItemController.add);
 router.delete("/items/:id", ItemController.delete);
 
+router.get("/api/datas/:uuid", DataController.findByUuid);
+router.post("/api/datas", DataController.publish);
 module.exports = router;
