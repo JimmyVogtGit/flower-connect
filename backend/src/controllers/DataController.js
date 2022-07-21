@@ -36,6 +36,21 @@ class DataController {
         });
     });
   };
+
+  static findIot = (req, res) => {
+    const { uuid } = req.params;
+    models.flower
+      .find(uuid)
+      .then(([response]) => {
+        const uuidExist = response.length;
+        if (uuidExist > 0) {
+          res.status(200).send(true);
+        } else {
+          res.status(200).send(false);
+        }
+      })
+      .catch((err) => res.status(400).send(err));
+  };
 }
 
 module.exports = DataController;
