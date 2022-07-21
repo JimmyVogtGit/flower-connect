@@ -47,7 +47,7 @@ function Login() {
       }
     );
   };
-  const [timer, setTimer] = useState(10);
+
   const {
     register,
     handleSubmit,
@@ -65,6 +65,7 @@ function Login() {
       })
       .then((response) => {
         if (response.data === true) {
+          localStorage.setItem("useruuid", JSON.stringify(data.uuid));
           iotFind();
           window.setTimeout(() => {
             navigate("/level");
@@ -126,7 +127,6 @@ function Login() {
         </form>
         <ToastContainer />
       </div>
-      {timer !== 10 && <p>{timer}</p>}
     </div>
   );
 }

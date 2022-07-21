@@ -39,7 +39,6 @@ class DataController {
   };
 
   static findIot = (req, res) => {
-    console.log("couocu toi");
     const { uuid } = req.params;
     models.flower
       .find(uuid)
@@ -52,6 +51,14 @@ class DataController {
         }
       })
       .catch((err) => res.status(400).send(err));
+  };
+
+  static changeLight = (req, res) => {
+    console.log(req.body);
+    const { light, uuid } = req.body;
+    models.flower.changeLight(light, uuid).then((response) => {
+      res.status(200).send(true);
+    });
   };
 }
 
