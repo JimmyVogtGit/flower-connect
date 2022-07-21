@@ -1,0 +1,31 @@
+.describe-container {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    flex-direction: column;
+    text-align: center;
+    background-color: var(--yellow-color);
+}
+
+.flower-picture {
+    width: 150px;
+    height: 150px;
+    clip-path: ellipse(50% 50%);
+}
+
+.icon-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--blue-color);
+    border-radius: 20px 20px 0 0;
+    color: var(--yellow-color);
+}

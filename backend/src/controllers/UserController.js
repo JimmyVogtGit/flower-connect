@@ -1,6 +1,7 @@
 const models = require("../models");
 const { verifyPassword } = require("../services/hashedPassword");
 const createToken = require("../services/createJwt");
+const verifyToken = require("../services/verifyToken");
 
 class UserController {
   static register = (req, res) => {
@@ -55,6 +56,17 @@ class UserController {
         }
       })
       .catch((err) => res.status(400).send(err));
+  };
+
+  static authorization = (req, res) => {
+    const userEmail = verifyToken(req.cookies.userCookie);
+
+    res.status(200).send(userEmail);
+  };
+
+  static logout = (req, res) => {
+    res.clearCookie("userCookie");
+    res.send(true);
   };
 }
 

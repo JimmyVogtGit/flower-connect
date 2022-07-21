@@ -17,6 +17,15 @@ class DataManager extends AbstractManager {
       [uuid, temperature, humidity, luminosity, light, userid]
     );
   }
+
+  changeLight(light, uuid) {
+    return this.connection.query(
+      `update flower set light = ?
+    where uuid = ?
+    order by id DESC LIMIT 1`,
+      [light, uuid]
+    );
+  }
 }
 
 module.exports = DataManager;
