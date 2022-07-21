@@ -21,6 +21,7 @@ router.post("/api/datas", DataController.publish);
 
 router.get("/api/users/:uuid");
 router.post("/api/user", validation(schema), UserController.register);
+router.post("/api/verify-user", UserController.verifyUser);
 
 router.get("/api/find-iot/:uuid", DataController.findIot);
 module.exports = router;

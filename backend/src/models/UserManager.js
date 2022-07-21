@@ -18,11 +18,18 @@ class UserManager extends AbstractManager {
     );
   }
 
-  createUser(email, password, uuid) {
+  verifyUser(email) {
+    return this.connection.query(
+      `SELECT * FROM ${UserManager.table} WHERE email=?`,
+      [email]
+    );
+  }
+
+  createUser(email, password) {
     return hashPassword(password).then((hash) => {
       return this.connection.query(
-        `INSERT INTO ${UserManager.table} (email, password, uuid) values (?,?,?)  `,
-        [email, hash, uuid]
+        `INSERT INTO ${UserManager.table} (email, password) values (?,?)  `,
+        [email, hash]
       );
     });
   }

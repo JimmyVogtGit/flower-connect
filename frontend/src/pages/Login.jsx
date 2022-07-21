@@ -20,28 +20,34 @@ const schema = yup
 function Login() {
   const navigate = useNavigate();
   const iotFind = () => {
-    toast.success("Vous êtes désormais connecté avec l'object", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    toast.success(
+      "Vous êtes désormais connecté, Vous pouvez dès à present connecter votre IoT",
+      {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }
+    );
   };
   const iotNotFind = () => {
-    toast.error("uuid non trouvé, object non connecté. Veuillez recommencer", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    toast.error(
+      "Veuillez connecter l'IoT et recommencer, Synchronisation échouée",
+      {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }
+    );
   };
-  const [connectIot, setConnectIot] = useState(false);
+  const [timer, setTimer] = useState(10);
   const {
     register,
     handleSubmit,
@@ -53,26 +59,24 @@ function Login() {
   });
 
   const onSubmit = (data) => {
-    const { uuid } = data;
-
     axios
-      .get(`http://localhost:5000/api/find-iot/${uuid}`)
+      .post(`http://localhost:5000/api/verify-user`, data, {
+        withCredentials: true,
+      })
       .then((response) => {
-        const dataResponse = response.data;
-        if (dataResponse === true) {
+        if (response.data === true) {
           iotFind();
           window.setTimeout(() => {
             navigate("/level");
           }, 3500);
         } else {
+          iotNotFind();
           resetField("email");
           resetField("password");
           resetField("uuid");
-          iotNotFind();
         }
       })
-      .catch((err) => {
-        console.log("coucou err", err);
+      .catch(() => {
         toast.error("🦄 failed", {
           position: "top-center",
           autoClose: 2000,
@@ -122,6 +126,7 @@ function Login() {
         </form>
         <ToastContainer />
       </div>
+      {timer !== 10 && <p>{timer}</p>}
     </div>
   );
 }

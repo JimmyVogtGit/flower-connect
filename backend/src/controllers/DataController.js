@@ -19,8 +19,9 @@ class DataController {
 
   static publish = (req, res) => {
     const datas = req.body;
-    models.user.findUserId(datas.uuid).then((response) => {
-      const userid = response[0][0].id;
+    models.flower_user.findId(datas.uuid).then((response) => {
+      const { userid } = response[0][0];
+
       models.flower
         .postPublish(datas, userid)
         .then(() => {
@@ -38,6 +39,7 @@ class DataController {
   };
 
   static findIot = (req, res) => {
+    console.log("couocu toi");
     const { uuid } = req.params;
     models.flower
       .find(uuid)
