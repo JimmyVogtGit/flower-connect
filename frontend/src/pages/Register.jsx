@@ -93,11 +93,20 @@ function Register() {
       <div className="form-container">
         <h2 className="register-title">Inscription</h2>
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
-          <input label="coucou" {...register("email", { required: true })} />
+          <input
+            defaultValue="email"
+            {...register("email", { required: true })}
+          />
           {errors.email && <p>{errors.email.message}</p>}
-          <input {...register("password", { required: true })} />
+          <input
+            defaultValue="mot de passe"
+            {...register("password", { required: true })}
+          />
           {errors.password && <p>{errors.password.message}</p>}
-          <input {...register("confirmPassword", { required: true })} />
+          <input
+            defaultValue="Confirmez mot de passe"
+            {...register("confirmPassword", { required: true })}
+          />
           {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
 
           <button
