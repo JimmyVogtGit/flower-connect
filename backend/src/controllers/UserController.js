@@ -35,7 +35,6 @@ class UserController {
       .verifyUser(email)
       .then(([user]) => {
         const userid = user[0].id;
-
         const { password: hash } = user[0];
         if (user.length > 0) {
           verifyPassword(password, hash).then((passwordOk) => {
