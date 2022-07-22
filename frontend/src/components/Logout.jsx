@@ -11,7 +11,7 @@ function Logout() {
       .delete("http://localhost:5000/logout", { withCredentials: true })
       .then(() => {
         window.setTimeout(() => {
-          navigate("/level");
+          navigate("/");
         }, 2000);
       });
   };

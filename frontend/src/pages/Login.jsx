@@ -68,7 +68,7 @@ function Login() {
           localStorage.setItem("useruuid", JSON.stringify(data.uuid));
           iotFind();
           window.setTimeout(() => {
-            navigate("/level");
+            navigate("/");
           }, 3500);
         } else {
           iotNotFind();
@@ -97,11 +97,19 @@ function Login() {
       <div className="form-container">
         <h2 className="login-title">Connexion</h2>
         <form className="form" onSubmit={handleSubmit(onSubmit)}>
-          <input {...register("email")} />
+          <input defaultValue="email" {...register("email")} />
           {errors.email && <p>{errors.email.message}</p>}
-          <input {...register("password", { required: true })} />
+
+          <input
+            defaultValue="mot de passe"
+            {...register("password", { required: true })}
+          />
           {errors.password && <p>{errors.password.message}</p>}
-          <input {...register("uuid", { required: true })} />
+
+          <input
+            defaultValue="uuid IoT"
+            {...register("uuid", { required: true })}
+          />
           {errors.uuid && <p>{errors.uuid.message}</p>}
 
           <button
