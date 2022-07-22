@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../assets/css/Register.css";
 import { useForm } from "react-hook-form";
